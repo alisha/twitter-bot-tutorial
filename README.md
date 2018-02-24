@@ -12,6 +12,16 @@ We're going to use [Tweepy](https://github.com/tweepy/tweepy), a tool that lets 
 pip install tweepy
 ```
 
+### Create a .gitignore file
+
+We're going to be using some API keys and secret keys, which you don't want to release to the world because then other people can make API calls as if you were making them. For example, someone could tweet to your Twitter account! To stop that, create a new file called `.gitignore` (no file extension) and enter the following
+```
+secret.py
+*.pyc
+```
+
+Make sure you commit this change before continuing.
+
 ### Setting up Twitter
 
 An optional, but helpful, step is to create a new Twitter account for your bot. For the time being, you can use your personal Twitter, but you'll eventually want to create a separate account for the bot so you can share this with others. Make sure you're logged in to the account you want to tweet from.
@@ -51,3 +61,16 @@ except TweepyError:
 Congrats! You can now tweet from your code. Feel free to stop here. We're going to continue and learn about how we can use Markov chains to generate text, and then tweet the messages that we generate.
 
 ## Intro to Markov Chains
+
+We're going to learn how to generate messages to tweet. Instead of coming up with phrases all on our own, we're going to write code that can emulate another text. This tutorial will recreate my [PoliticsBot](https://github.com/alisha/PoliticsBot), so we'll try to generate political statements based on historical speeches.
+
+Let's say we want to generate some messages that sound like the text below:
+```
+I am happy
+I am a programmer
+I am a college student
+I am teaching a workshop
+```
+
+With Markov chains, we're going to take a few words and use probability to come up with the word that comes next. In each 
+
