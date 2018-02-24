@@ -72,5 +72,81 @@ I am a college student
 I am teaching a workshop
 ```
 
-With Markov chains, we're going to take a few words and use probability to come up with the word that comes next. In each 
+With Markov chains, we're going to take a few words and use probability to come up with the word that comes next. Let's say we want to generate a statement that starts with the phrase "I am". What should come next? Based on the text above, we can say there's a 50% chance the next word should be "a", a 25% chance the next word should be "happy", and a 25% chance the next word should be "teaching". We can use a random number generator and pick the next word according to these probabilities. We continue doing this process until our reference text (called our **corpus**) can't give us any more words to say.
 
+We're going to break up this project now into 3 steps: creating a word map to identify those patterns of words, generating messages using our word map, and then tweeting those messages.
+
+You can use a new file if you'd like, or continue in the same file. If you create a new file, make sure to later add in your Twitter functionality. If you continue in the same file, it's best to comment out your function that tweets "Hello, world!" while we work on the Markov chains part.
+
+### Generating a word map
+
+All of the code for this section is in `gen-word-map.py`.
+
+First, download the file `simple-corpus.txt` from this repository and put it in the folder with your code. Add the following code to your python file so we can access the text in your corpus file: 
+
+```
+def main():
+  # Open and read corpus
+  corpus = open("simple-corpus.txt", "r")
+  word_lines = corpus.readlines()
+  corpus.close()
+
+if __name__ == '__main__':
+  main()
+```
+
+You can now open your corpus file and read the lines in the file into an array (called `word_lines`).
+
+Given our corpus text, we want to store every pair of words with a word that should come next. From the corpus above, that means we want to store the following mappings: `I am => happy`, `I am => a`, `I am => a`, and `I am => teaching`.
+
+To do this, we're going to use a data structure called a **dictionary** (abbreviated as a `dict`). A dict lets you map things to other things — in our case, it lets us map a pair of words to a list of words that should follow. Copy and past the following code into your file, before the `main()` function:
+
+```
+sentence_starters = []
+
+# Create map of words
+# word_lines is a list of strings that represents our file
+def create_word_map(word_lines):
+  word_map = dict()
+
+  # Go through each line in our corpus
+  for line in word_lines:
+    
+    # Split each line into a list of words
+    words = line.split()
+
+    end_of_sentence = True
+    
+    # Go through each word in our corpus line
+    for index in range(0,len(words)-2):
+      
+      # If we're at the end of a sentence, add the start of the next sentence
+      # to our array of sentence starters
+      if end_of_sentence:
+        sentence_starters.append((words[index], words[index + 1]))
+        end_of_sentence = False
+
+      # Check if at the end of sentence
+      if words[index + 1] == "?" or words[index + 1] == "." or words[index + 1] == "!":
+        end_of_sentence = True
+
+      # Add word pairings to our word_map
+      if (words[index], words[index + 1]) in word_map.keys():
+        word_map[(words[index], words[index + 1])].append(words[index + 2])
+      else:
+        word_map[(words[index], words[index + 1])] = [words[index + 2]]
+
+  return word_map
+```
+
+We're now going to go through this code, line by line. If you think you understand this code, go ahead and copy the contents of `gen-word-map.py` into your file, and then skip to the next section.
+
+**Explanation TBD**
+
+### Generating Messages
+
+All of the code for this section is in `gen-message.py`. It contains code from `gen-word-map.py`.
+
+### Tweeting our Messages
+
+All of the code for this section is in `markov.py`.
