@@ -141,7 +141,7 @@ def create_word_map(word_lines):
 
 We're now going to go through this code, line by line. If you think you understand this code, go ahead and copy the contents of `gen-word-map.py` into your file, and then skip to the next section.
 
-**Explanation TBD**
+**Explanation of this code TBD**
 
 ### Generating Messages
 
@@ -187,6 +187,45 @@ def gen_message(word_map):
       return tweet_array
 ```
 
+**Explanation of this code TBD**
+
 ### Tweeting our Messages
 
-All of the code for this section is in `markov.py`.
+All of the code for this section is in `markov.py`. It contains code from `gen-word-map.py` and `gen-message.py`.
+
+Now, we're going to add back in the ability to tweet our message. First, if you started working on a new file for this part of the tutorial, add your import statements back in:
+```
+import secret   # this has our API keys
+import tweepy
+```
+
+Then, modify the `main()` function to tweet the message we generated:
+```
+def main():
+  # Open and read corpus
+  corpus = open("simple-corpus.txt", "r")
+  word_lines = corpus.readlines()
+  corpus.close()
+
+  # Create word map
+  word_map = create_word_map(word_lines)
+  tweet_array = gen_message(word_map)
+  tweet = ' '.join(tweet_array)
+
+  # Twitter authentication
+  auth = tweepy.OAuthHandler(secret.TWITTER_CLIENT, secret.TWITTER_SECRET)
+  auth.set_access_token(secret.TWITTER_ACCESS, secret.TWITTER_ACCESS_SECRET)
+  api = tweepy.API(auth)
+
+  # Try to tweet
+  try:
+    api.update_status(tweet)
+  except TweepyError:
+    print "Could not tweet"
+```
+
+You've now written code to read a file, generate word mappings, create a message based on those word mappings, and tweet that message. That's a lot! Congrats on coming this far.
+
+### Tweeting regulary (or, how to cron)
+
+**Section TBD**
