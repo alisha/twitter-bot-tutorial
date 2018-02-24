@@ -47,8 +47,8 @@ Before doing anything fancy, we're going to learn how to tweet from our programs
 import secret   # this has our API keys
 import tweepy
 
-auth = tweepy.OAuthHandler(TWITTER_CLIENT, TWITTER_SECRET)
-auth.set_access_token(TWITTER_ACCESS, TWITTER_ACCESS_SECRET)
+auth = tweepy.OAuthHandler(secret.TWITTER_CLIENT, secret.TWITTER_SECRET)
+auth.set_access_token(secret.TWITTER_ACCESS, secret.TWITTER_ACCESS_SECRET)
 
 api = tweepy.API(auth)
 
