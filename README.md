@@ -39,7 +39,7 @@ TWITTER_ACCESS = "" # enter your access token in the quotes
 TWITTER_ACCESS_SECRET = "" # enter your access token secret in the quotes
 ```
 
-## Learning to tweet
+### Learning to tweet
 
 Before doing anything fancy, we're going to learn how to tweet from our programs. Create a file named `main.py` and enter the code below. Note that this code is found in the `tweet.py` file in this repo.
 
