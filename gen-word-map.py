@@ -1,5 +1,3 @@
-from pprint import PrettyPrinter
-
 sentence_starters = []
 
 # Create map of words
@@ -37,8 +35,6 @@ def create_word_map(word_lines):
   return word_map
 
 def main():
-  pp = PrettyPrinter(indent=2)
-
   # Open and read corpus
   corpus = open("simple-corpus.txt", "r")
   word_lines = corpus.readlines()

@@ -2,3 +2,11 @@ I am happy
 I am a programmer
 I am a college student
 I am teaching a workshop
+Hello world
+A programmer is someone who writes code
+We are at a hackathon right now
+We are students
+I go to a college in Cambridge
+We can make something great this weekend
+A designer is someone who designs
+High schoolers are students in high school
