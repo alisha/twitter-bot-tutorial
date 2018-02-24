@@ -141,7 +141,15 @@ def create_word_map(word_lines):
 
 We're now going to go through this code, line by line. If you think you understand this code, go ahead and copy the contents of `gen-word-map.py` into your file, and then skip to the next section.
 
-**Explanation of this code TBD**
+In addition to creating a word map, we're going to keep track of a list of sentence starters (`sentence_starters = []`). When we generate messages later, we'll use this to pick the first 2 words of our tweet. Then, we can build on that tweet using the word map we just coded.
+
+The first thing we do is create a new dict called `word_map` with the line `word_map = dict()`. Then, we have a for loop that goes through each line in `word_lines`, aka each line of text in our corpus file.
+
+We then split the corpus line into a list of words by calling `words = line.split()`. We also set up a variable called `end_of_sentence` that is true when we've reached the end of a sentence, or false if we haven't. This will be useful in a little bit.
+
+Now, we go through the list of words that we just created. If we're at the end of a sentence, we add the next 2 words to our list of sentence starters, and then continue. Then, we check if we're at the end of a sentence by checking for punctuation (we can have multiple sentences in a given line).
+
+**More explanation of this code TBD**
 
 ### Generating Messages
 
@@ -225,6 +233,14 @@ def main():
 ```
 
 You've now written code to read a file, generate word mappings, create a message based on those word mappings, and tweet that message. That's a lot! Congrats on coming this far.
+
+The rest of this tutorial covers where to find a corpus, and how to make your program run automatically so you can tweet at regular intervals witout manually running your code.
+
+### Where to find a corpus
+
+There are 3 sample texts in this repo: `simple-corpus.txt`, which we've been using so far, as well as `historical-speeches.txt`, which I compiled manually for [@PoliticianBot](https://twitter.com/politicianbot), and `jane-austen.txt`, which contains Jane Austen's novels *Emma* and *Pride and Prejudice* and was used for [@AustenBot](https://twitter.com/austenbot). You can find a lot of old novels online at [Project Gutenberg](https://www.gutenberg.org/).
+
+You can use web scraping to get other corpuses (though please don't try to scrape the same website too many times, since that can overwhelm the site's server). You can also use APIs to collect information -- what if you used the Twitter API to read a ton of tweets, and then use that as your corpus?
 
 ### Tweeting regulary (or, how to cron)
 
