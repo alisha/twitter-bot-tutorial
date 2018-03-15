@@ -40,7 +40,7 @@ def create_word_map(word_lines):
 
 
 # Returns true if the contents of the array is under Twitter's character limit
-def underLimit(array):
+def under_limit(array):
   return len(' '.join(array)) < 280
 
 
@@ -56,7 +56,7 @@ def gen_message(word_map):
   # Holds an array of all words in the tweet
   tweet_array = [first_word, second_word]
 
-  while underLimit(tweet_array) is True:
+  while under_limit(tweet_array) is True:
     # Figure out the last 2 words in our tweet
     end_index = len(tweet_array)
     last_words = [tweet_array[end_index-2], tweet_array[end_index-1]]
@@ -72,7 +72,7 @@ def gen_message(word_map):
       return tweet_array
 
     # Make sure we're not over 280 characters
-    if underLimit(tweet_array) is False:
+    if under_limit(tweet_array) is False:
       return tweet_array
 
 

@@ -147,9 +147,9 @@ The first thing we do is create a new dict called `word_map` with the line `word
 
 We then split the corpus line into a list of words by calling `words = line.split()`. We also set up a variable called `end_of_sentence` that is true when we've reached the end of a sentence, or false if we haven't. This will be useful in a little bit.
 
-Now, we go through the list of words that we just created. If we're at the end of a sentence, we add the next 2 words to our list of sentence starters, and then continue. Then, we check if we're at the end of a sentence by checking for punctuation (we can have multiple sentences in a given line).
+Now, we go through the list of words that we just created. If we're at the end of a sentence, we add the next 2 words to our list of sentence starters, and then continue. Then, we check if we're at the end of a sentence by checking for punctuation (we can have multiple sentences in a given line). Then, we map the current word and the word that follows it to the next word. This builds our dictionary with things like `{("I", "am"), "happy"}`.
 
-**More explanation of this code TBD**
+When we're done building all of these mappings, we return our word map.
 
 ### Generating Messages
 
@@ -159,7 +159,7 @@ Add the following code to your file, after the `create_word_map()` function but 
 
 ```
 # Returns true if the contents of the array is under Twitter's character limit
-def underLimit(array):
+def under_limit(array):
   return len(' '.join(array)) < 280
 
 
@@ -175,7 +175,7 @@ def gen_message(word_map):
   # Holds an array of all words in the tweet
   tweet_array = [first_word, second_word]
 
-  while underLimit(tweet_array) is True:
+  while under_limit(tweet_array) is True:
     # Figure out the last 2 words in our tweet
     end_index = len(tweet_array)
     last_words = [tweet_array[end_index-2], tweet_array[end_index-1]]
@@ -191,11 +191,19 @@ def gen_message(word_map):
       return tweet_array
 
     # Make sure we're not over 280 characters
-    if underLimit(tweet_array) is False:
+    if under_limit(tweet_array) is False:
       return tweet_array
 ```
 
-**Explanation of this code TBD**
+Let's go through the `gen_message` function. It takes in a `word_map` parameter, which is a dictionary mapping a pair of strings to another string -- this is what we just created in the last step.
+
+First, we generate a random start to our sentence by picking a random element in the `senence_starters` array. We can retrieve the first and second words from this, and we add this to an array of strings that will make up our tweet.
+
+Now, we want to add words to our tweet until we've reached the character limit. We can check this with the `under_limit` function. This function takes an array of strings, joins all the elements into one string (separating each element with a space, as signifed by the `' '`), and then checking the length of this string.
+
+While we're under the character limit, we want to add words to our tweet. The way to do this is to check the last two words in our tweet, and looking them up in our dictionary to find what word should come next. We find the last two words in our tweet with the line `last_words = [tweet_array[end_index-2], tweet_array[end_index-1]]`. 
+
+Then, we check if we've stored this pair of words in our `word_map` by checking the `word_map`'s `keys`. If it's in there, we pick a random third word. If it's not there, we stop building our tweet and just return it.
 
 ### Tweeting our Messages
 
